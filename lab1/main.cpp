@@ -30,6 +30,15 @@ map<string, string> ParseNamedArguments(int argc, char* argv[]) {
 }
 
 
+string add_to_name(const string &name, const string &need_add) {
+	string new_name = name;
+	new_name.resize(name.size() - 4);
+	new_name += need_add;
+	new_name += ".bmp";
+	return new_name;
+}
+
+
 int main(int argc, char* argv[]) {
 	map<string, string> named_args = ParseNamedArguments(argc, argv);
 
@@ -53,12 +62,12 @@ int main(int argc, char* argv[]) {
 	GaussianFilter filter(size, sigma);
 	BMP8bit file(filename);
 	file.rotate_right();
-	file.save("rotated_right_" + filename);
+	file.save(add_to_name(filename, "_rotated_right"));
 	file.rotate_left();
 	file.rotate_left();
-	file.save("rotated_left_" + filename);
+	file.save(add_to_name(filename, "_rotated_left"));
 	file.apply_filter(&filter);
-	file.save("with_filters_" + filename);
+	file.save(add_to_name(filename, "_with_filters"));
 
 	cout << "OK" << endl;
 	return 0;

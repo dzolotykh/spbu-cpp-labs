@@ -31,7 +31,6 @@ void BMP8bit::save(const std::string &filename) {
 	FILE* f = fopen(filename.c_str(), "wb");
     fwrite(header, sizeof(BMPHeader), 1, f);
     fwrite(other_info, sizeof(unsigned char), header->bfOffBits - sizeof(BMPHeader), f);
-
     for (int i = 0; i < pixels.size(); i++) {
     	for (int j = 0; j < pixels[i].size(); j++) {
     		buff[0] = static_cast<unsigned char>(pixels[i][j]);
