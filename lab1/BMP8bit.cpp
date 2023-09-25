@@ -2,6 +2,9 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <stdexcept>
+
+using namespace std;
 
 BMP8bit::BMP8bit(const std::string &filename) {
 	unsigned char buff[1];
@@ -10,13 +13,17 @@ BMP8bit::BMP8bit(const std::string &filename) {
 	fread(header, sizeof(BMPHeader), 1, f);
 	int height = header->height;
     int width = header->width;
+    if (header->biBitCount != 8) {
+    	throw std::runtime_error("Глубина изображения должна равняться 8.");
+    }
+    cout << header->bfSize << endl;
     pixels.resize(height, std::vector<double>(width, 0));
     other_info = new unsigned char[header->bfOffBits - sizeof(BMPHeader)];
     fread(other_info, sizeof(unsigned char), header->bfOffBits - sizeof(BMPHeader), f);
+    cout << ftell(f) << " " << header->bfSize - header->bfOffBits << " " << width * height << endl;
     for (int i = 0; i < width * height; i++) {
-    	pixels[i / height][i % width] = readn(1, buff, f);
+    	pixels[i / width][i % width] = readn(1, buff, f);
     }
-
     fclose(f);
 }
 
