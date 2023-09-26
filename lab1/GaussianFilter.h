@@ -1,3 +1,6 @@
+#ifndef H_GaussianFilter
+#define H_GaussianFilter
+
 #include <vector>
 #include "Filter.h"
 
@@ -11,3 +14,5 @@ public:
 	GaussianFilter(int size, double sigma);
 	void apply(std::vector<std::vector<double>>& image);
 };
+
+#endif

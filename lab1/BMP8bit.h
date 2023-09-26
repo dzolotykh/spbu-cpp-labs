@@ -1,3 +1,6 @@
+#ifndef H_BMP8bit
+#define H_BMP8bit
+
 #include <vector>
 #include "Filter.h"
 
@@ -33,3 +36,5 @@ public:
 	void apply_filter(Filter* filter);
 	void save(const std::string &filename);
 };
+
+#endif

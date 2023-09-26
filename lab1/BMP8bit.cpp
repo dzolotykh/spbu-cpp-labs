@@ -1,10 +1,7 @@
 #include "BMP8bit.h"
 #include <string>
 #include <vector>
-#include <iostream>
 #include <stdexcept>
-
-using namespace std;
 
 BMP8bit::BMP8bit(const std::string &filename) {
 	unsigned char buff[1];

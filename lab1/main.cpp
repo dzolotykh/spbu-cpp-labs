@@ -2,14 +2,11 @@
 #include <stdio.h>
 #include "GaussianFilter.h"
 #include "BMP8bit.h"
-
-using namespace std;
-
-
-
 #include <iostream>
 #include <string>
 #include <map>
+
+using namespace std;
 
 map<string, string> ParseNamedArguments(int argc, char* argv[]) {
     map<string, string> named_args;
