@@ -1,6 +1,5 @@
 #include "BMP8bit.h"
 #include "GaussianFilter.h"
-#include <bits/stdc++.h>
 #include <iostream>
 #include <map>
 #include <stdio.h>
