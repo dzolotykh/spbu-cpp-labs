@@ -33,6 +33,7 @@ class BMP8bit
 
   public:
     BMP8bit(const std::string& filename);
+    ~BMP8bit();
     void rotate_left();
     void rotate_right();
     void apply_filter(Filter* filter);

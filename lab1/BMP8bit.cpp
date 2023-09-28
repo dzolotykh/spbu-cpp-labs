@@ -90,3 +90,8 @@ void BMP8bit::writen(int n, unsigned char* buff, FILE* f)
 {
     fwrite(buff, sizeof(unsigned char), n, f);
 }
+
+BMP8bit::~BMP8bit() {
+    delete header;
+    delete[] other_info;
+}
