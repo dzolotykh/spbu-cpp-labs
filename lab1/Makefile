@@ -8,7 +8,7 @@ CC = g++
 CFLAGS = -Wall -std=c++17
 
 # Исходные файлы
-SRCS = main.cpp GaussianFilter.cpp BMP8bit.cpp
+SRCS = main.cpp GaussianFilter.cpp BMP24bit.cpp Pixel.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

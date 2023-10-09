@@ -2,19 +2,23 @@
 #define H_GaussianFilter
 
 #include "Filter.h"
+#include "BMP24bit.h"
 #include <vector>
 
 class GaussianFilter : public Filter
 {
   private:
-    std::vector<std::vector<double>> filter;
+    double** kernel;
+    double sigma;
+    int size;
+    int radius;
 
-    double gaussian(double x, double y, double sigma);
-    double get_pixel_val(std::vector<std::vector<double>>& image, int x, int y);
+    static Pixel get_pixel_val(Pixel** image, int height, int width, int x, int y);
 
   public:
     GaussianFilter(int size, double sigma);
-    void apply(std::vector<std::vector<double>>& image);
+    ~GaussianFilter();
+    void apply(Pixel** image, int height, int width);
 };
 
 #endif

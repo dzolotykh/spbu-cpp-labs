@@ -1,5 +1,4 @@
-lab1/images
-.*
 lab1/*.o
+.*
 lab1/main
 !.gitignore

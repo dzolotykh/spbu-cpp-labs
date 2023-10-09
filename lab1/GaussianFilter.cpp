@@ -1,93 +1,105 @@
 #include "GaussianFilter.h"
+#include "Pixel.h"
 #include <cmath>
 #include <vector>
 
-double GaussianFilter::get_pixel_val(std::vector<std::vector<double>>& image, int x, int y)
+Pixel GaussianFilter::get_pixel_val(Pixel** image, int height, int width, int x, int y)
 {
     x = abs(x);
     y = abs(y);
-    if (x >= image.size())
+    if (x >= height)
     {
-        x = image.size() - 1 - (x % (int)image.size());
+        x = height - 1 - (x % height);
     }
-    if (y >= image[x].size())
+    if (y >= width)
     {
-        y = image[x].size() - 1 - (y % (int)image[x].size());
+        y = width - 1 - (y % width);
     }
 
     return image[x][y];
 }
 
-double GaussianFilter::gaussian(double x, double y, double sigma)
+GaussianFilter::GaussianFilter(int _size, double _sigma)
+    : sigma(_sigma), size(_size), radius(_size / 2)
 {
-    return (1.0 / (2.0 * M_PI * sigma * sigma)) * exp(-(x * x + y * y) / (2.0 * sigma * sigma));
-}
-
-GaussianFilter::GaussianFilter(int size, double sigma)
-{
-    filter.resize(size, std::vector<double>(size, 0.0));
-
-    // Вычисляем среднюю позицию фильтра
-    int center = size / 2;
-
-    // Заполняем матрицу коэффициентами Гаусса
-    for (int i = 0; i < size; ++i)
+    this->kernel = new double*[size];
+    double kernel_sum = 0;
+    for (int y = -radius; y <= radius; y++)
     {
-        for (int j = 0; j < size; ++j)
+        this->kernel[y + radius] = new double[size];
+        for (int x = -radius; x <= radius; x++)
         {
-            int x = i - center;
-            int y = j - center;
-            filter[i][j] = gaussian(x, y, sigma);
+            double exponent = -(x * x + y * y) / (2 * sigma * sigma);
+            double value = exp(exponent) / (2 * M_PI * sigma * sigma);
+            kernel[y + radius][x + radius] = value;
+            kernel_sum += value;
         }
     }
-
-    // Нормализуем фильтр (сумма всех элементов равна 1)
-    double sum = 0.0;
-    for (int i = 0; i < size; ++i)
+    for (int y = 0; y < size; y++)
     {
-        for (int j = 0; j < size; ++j)
+        for (int x = 0; x < size; x++)
         {
-            sum += filter[i][j];
-        }
-    }
-    for (int i = 0; i < size; ++i)
-    {
-        for (int j = 0; j < size; ++j)
-        {
-            filter[i][j] /= sum;
+            kernel[y][x] /= kernel_sum;
         }
     }
 }
 
-void GaussianFilter::apply(std::vector<std::vector<double>>& image)
+GaussianFilter::~GaussianFilter()
 {
-    int imageHeight = image.size();
-    int imageWidth = image[0].size();
-    int filterSize = filter.size();
-    int filterRadius = filterSize / 2;
-
-    std::vector<std::vector<double>> result(imageHeight, std::vector<double>(imageWidth, 0.0));
-
-    for (int y = 0; y < imageHeight; ++y)
+    for (int i = 0; i < size; i++)
     {
-        for (int x = 0; x < imageWidth; ++x)
-        {
-            double blurredPixel = 0.0;
+        delete[] kernel[i];
+    }
+    delete[] kernel;
+}
 
-            for (int i = -filterRadius; i <= filterRadius; ++i)
+void GaussianFilter::apply(Pixel** image, int height, int width)
+{
+    // Создаем временный массив для хранения промежуточных результатов
+    Pixel** tempImage = new Pixel*[height];
+    for (int i = 0; i < height; i++)
+    {
+        tempImage[i] = new Pixel[width];
+    }
+
+    // Применяем гауссово размытие к каждому пикселю
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            double r = 0, g = 0, b = 0;
+            // Применяем маску к окружающим пикселям
+            for (int j = -radius; j <= radius; j++)
             {
-                for (int j = -filterRadius; j <= filterRadius; ++j)
+                for (int i = -radius; i <= radius; i++)
                 {
-                    int imageX = x + j;
-                    int imageY = y + i;
-                    blurredPixel += get_pixel_val(image, imageY, imageX) *
-                                    filter[i + filterRadius][j + filterRadius];
+                    Pixel tmp = get_pixel_val(image, height, width, y + j, x + i);
+                    r += static_cast<double>(tmp.r) * kernel[j + radius][i + radius];
+                    g += static_cast<double>(tmp.g) * kernel[j + radius][i + radius];
+                    b += static_cast<double>(tmp.b) * kernel[j + radius][i + radius];
                 }
             }
 
-            result[y][x] = blurredPixel;
+            // Нормализуем и сохраняем результат во временном массиве
+            tempImage[y][x].r = static_cast<uint8_t>(r);
+            tempImage[y][x].g = static_cast<uint8_t>(g);
+            tempImage[y][x].b = static_cast<uint8_t>(b);
         }
     }
 
-    image = result;
+    // Копируем результат из временного массива в исходный
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            image[y][x] = tempImage[y][x];
+        }
+    }
+
+    // Освобождаем память, выделенную под временный массив
+    for (int i = 0; i < height; i++)
+    {
+        delete[] tempImage[i];
+    }
+    delete[] tempImage;
 }

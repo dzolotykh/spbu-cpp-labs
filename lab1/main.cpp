@@ -1,13 +1,13 @@
-#include "BMP8bit.h"
+#include "BMP24bit.h"
 #include "GaussianFilter.h"
 #include <iostream>
 #include <map>
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 
 using namespace std;
 
-map<string, string> ParseNamedArguments(int argc, char* argv[])
+map<string, string> parse_named_arguments(int argc, char* argv[])
 {
     map<string, string> named_args;
     for (int i = 1; i < argc; ++i)
@@ -42,7 +42,7 @@ string add_to_name(const string& name, const string& need_add)
 
 int main(int argc, char* argv[])
 {
-    map<string, string> named_args = ParseNamedArguments(argc, argv);
+    map<string, string> named_args = parse_named_arguments(argc, argv);
 
     if (named_args.count("filename") == 0)
     {
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     }
 
     GaussianFilter filter(size, sigma);
-    BMP8bit        file(filename);
+    BMP24bit       file(filename);
     file.rotate_right();
     file.save(add_to_name(filename, "_rotated_right"));
     file.rotate_left();
