@@ -16,7 +16,6 @@ BMP24bit::BMP24bit(const std::string& filename)
     int height = header->height;
     int width = header->width;
     this->pixels = new Pixel*[height];
-    new Pixel*[width];
     bytes_between_header_and_pixels = new unsigned char[header->bits_offset - sizeof(BMPHeader)];
     fread(bytes_between_header_and_pixels,
           sizeof(unsigned char),
@@ -54,7 +53,6 @@ void BMP24bit::rotate_left()
     }
     for (int j = 0; j < header->width; j++)
     {
-        rotated[j] = new Pixel[header->height];
         for (int i = 0; i < header->height; i++)
         {
             rotated[j][header->height - 1 - i] = this->pixels[i][j];
