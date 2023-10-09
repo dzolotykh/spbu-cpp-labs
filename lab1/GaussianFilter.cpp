@@ -80,20 +80,14 @@ void GaussianFilter::apply(Pixel** image, int height, int width)
                 }
             }
 
-            // Нормализуем и сохраняем результат во временном массиве
             tempImage[y][x].r = static_cast<uint8_t>(r);
             tempImage[y][x].g = static_cast<uint8_t>(g);
             tempImage[y][x].b = static_cast<uint8_t>(b);
         }
     }
 
-    // Копируем результат из временного массива в исходный
-    for (int y = 0; y < height; y++)
-    {
-        for (int x = 0; x < width; x++)
-        {
-            image[y][x] = tempImage[y][x];
-        }
+    for (int i = 0; i < height; i++) {
+        memcpy(image[i], tempImage[i], width * sizeof(Pixel));
     }
 
     // Освобождаем память, выделенную под временный массив
