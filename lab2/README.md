@@ -14,5 +14,5 @@
 ```shell
 cmake .
 make
-./lab2
+./main
 ```
