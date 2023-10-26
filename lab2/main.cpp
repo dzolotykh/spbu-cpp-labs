@@ -43,6 +43,10 @@ void test1(bool happy_end) {
     std::cout << "Pudge has killed all creeps. Pudge's health: "
               << hero->get_health() << std::endl;
   }
+  delete hero;
+  for (int i = 0; i < creeps.size(); i++) {
+    delete creeps[i];
+  }
 }
 
 void test2() {
@@ -61,12 +65,18 @@ void test2() {
   std::cout << "Used item with index = 0 (tango, + 20hp)" << std::endl;
   hero->use_item(0);
   std::cout << "Pudge's health: " << hero->get_health() << std::endl;
+
+  delete hero;
+  delete creep;
+  delete item;
+  delete item2;
 }
 
 void test3() {
   std::cout << "test 3" << std::endl;
   Game* g = new Game();
   g->start(123);
+  delete g;
 }
 
 int main() {

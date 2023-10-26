@@ -43,3 +43,8 @@ Hero *Game::generate_hero() {
       break;
   }
 }
+
+Game::~Game() {
+  delete this->t1;
+  delete this->t2;
+}

@@ -10,10 +10,9 @@ class Team {
   bool is_dire;
   int num_creeps;
 
-  ~Team();
-
  public:
   Team(bool _is_dire, Hero* h1, Hero* h2, Hero* h3, int num_creeps);
+  ~Team();
   void print_team();
 };
 

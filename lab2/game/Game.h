@@ -11,6 +11,7 @@ class Game {
 
  public:
   void start(int random_seed);
+  ~Game();
 };
 
 #endif
