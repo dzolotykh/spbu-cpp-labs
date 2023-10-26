@@ -3,7 +3,7 @@ project(lab2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(main.cpp
+add_executable(main main.cpp
         inventory/Inventory.h
         inventory/Inventory.cpp
         items/Item.cpp
@@ -36,5 +36,4 @@ add_executable(main.cpp
         entity/hero/Alchemist.cpp
         entity/creep/NeuralCreep.h
         entity/creep/NeuralCreep.cpp
-
 )
