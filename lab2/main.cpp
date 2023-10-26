@@ -24,6 +24,7 @@ void test1(bool happy_end) {
               << " ---> " << creeps[0]->get_health() << std::endl;
     if (!creeps[0]->is_alive()) {
       std::cout << "Creep died." << std::endl;
+      delete creeps[0];
       creeps.erase(creeps.begin());
     }
     for (auto& i : creeps) {
@@ -44,8 +45,8 @@ void test1(bool happy_end) {
               << hero->get_health() << std::endl;
   }
   delete hero;
-  for (int i = 0; i < creeps.size(); i++) {
-    delete creeps[i];
+  for (auto & creep : creeps) {
+    delete creep;
   }
 }
 
