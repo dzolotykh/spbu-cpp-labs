@@ -7,7 +7,6 @@ void Hero::add_item(Item *i) {
 
 void Hero::use_item(int item_id) {
     Item* item = this->inventory->operator[](item_id);
-    std::cout << item->get_add_health() << std::endl;
     this->add_health(item->get_add_health());
     this->add_agility(item->get_add_agility());
     this->add_strength(item->get_add_strength());
@@ -32,3 +31,15 @@ Hero::Hero() {
 }
 
 Hero::Hero(int _max_health, int _max_mana, int _damage) : Entity(_max_health, _max_mana, _damage) {}
+
+Hero::~Hero() {
+    delete this->inventory;
+}
+
+std::string Hero::get_name() const {
+    return this->name;
+}
+
+std::string Hero::get_stats() const {
+    return "(hp = " + std::to_string(get_health()) + ", damage = " + std::to_string(get_damage()) + ")";
+}

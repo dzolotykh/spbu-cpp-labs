@@ -3,9 +3,12 @@
 #include "items/Tango.h"
 #include "entity/hero/Pudge.h"
 #include "entity/creep/FractionCreep.h"
+#include "team/Team.h"
+#include "game/Game.h"
 
 
 void test1(bool happy_end) {
+    std::cout << "test 1" << std::endl;
     Hero* hero = new Pudge();
     std::vector<FractionCreep*> creeps = {
             new FractionCreep(false, 1),
@@ -35,12 +38,11 @@ void test1(bool happy_end) {
         std::cout << "Pudge died :((" << std::endl;
     } else {
         std::cout << "Pudge has killed all creeps. Pudge's health: " << hero->get_health() << std::endl;
-
     }
-
 }
 
 void test2() {
+    std::cout << "test 2" << std::endl;
     Hero* hero = new Pudge();
     std::cout << "Pudge's health: " << hero->get_health() << std::endl;
 
@@ -48,13 +50,24 @@ void test2() {
     Item* item2 = new FaerieFire();
     hero->add_item(item);
     hero->add_item(item2);
+    Creep* creep = new FractionCreep(false, 1);
+    creep->attack(hero);
+    std::cout << "Creep has attacked Pudge. Pudge's hp: " << hero->get_health() << std::endl;
     std::cout << "Used item with index = 0 (tango, + 20hp)" << std::endl;
     hero->use_item(0);
     std::cout << "Pudge's health: " << hero->get_health() << std::endl;
+}
+
+void test3() {
+    std::cout << "test 3" << std::endl;
+    Game *g = new Game();
+    g->start(123);
 }
 
 int main() {
     test1(true);
     std::cout << "--------------------------" << std::endl;
     test2();
+    std::cout << "--------------------------" << std::endl;
+    test3();
 }

@@ -5,7 +5,9 @@
 
 
 class Creep: public Entity {
-
+public:
+    Creep(int _max_health, int _max_mana, int _damage);
+    Creep();
 };
 
 

@@ -21,5 +21,20 @@ add_executable(lab2 main.cpp
         items/HeartOfTarrasque.cpp
         entity/creep/FractionCreep.cpp
         entity/creep/Creep.cpp
+        team/Team.h
+        team/Team.cpp
+        game/Game.h
+        game/Game.cpp
+        entity/hero/Sniper.h
+        entity/hero/Sniper.cpp
+        entity/hero/Axe.h
+        entity/hero/Axe.cpp
+        entity/hero/Dazzle.cpp
+        entity/hero/Puck.h
+        entity/hero/Puck.cpp
+        entity/hero/Alchemist.h
+        entity/hero/Alchemist.cpp
+        entity/creep/NeuralCreep.h
+        entity/creep/NeuralCreep.cpp
 
 )

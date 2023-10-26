@@ -9,10 +9,11 @@ protected:
     int mana{};
     int max_mana{};
 
-    int damage{};
+    int damage;
 public:
     Entity(int _max_health, int _max_mana, int _damage);
     Entity();
+
 
     void set_health(int _health);
     void set_mana(int _mana);
@@ -24,6 +25,8 @@ public:
     int get_health() const;
 
     int get_mana() const;
+
+    int get_damage() const;
 };
 
 

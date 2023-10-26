@@ -6,16 +6,15 @@ void Entity::set_health(int _health) {
 }
 
 void Entity::add_health(int _health) {
-    std::cout << "pidaras " << this->health + _health << std::endl;
     this->health = std::max(0, std::min(this->health + _health, this->max_health));
 }
 
 void Entity::set_mana(int _mana) {
-    this->health = std::max(0, std::min(_mana, this->mana));
+    this->mana = std::max(0, std::min(_mana, this->mana));
 }
 
 void Entity::add_mana(int _mana) {
-    this->health = std::max(0, std::min(this->mana + _mana, this->max_mana));
+    this->mana = std::max(0, std::min(this->mana + _mana, this->max_mana));
 }
 
 Entity::Entity(int _max_health, int _max_mana, int _damage): max_health(_max_health), max_mana(_max_mana), damage(_damage), health(_max_health), mana(_max_mana) {}
@@ -36,4 +35,8 @@ int Entity::get_health() const {
 
 int Entity::get_mana() const {
     return mana;
+}
+
+int Entity::get_damage() const {
+    return damage;
 }

@@ -10,11 +10,13 @@ protected:
     int strength;
     int agility;
     int intelligence;
+    std::string name;
 
 public:
     Hero();
+    ~Hero();
+
     Hero(int _max_health, int _max_mana, int _damage);
-    virtual void apply_skill(int skill_num, Entity *h) = 0;
 
     void add_item(Item *i);
     void use_item(int item_id);
@@ -23,6 +25,8 @@ public:
     void add_agility(int _add);
     void add_intelligence(int _add);
 
+    std::string get_name() const;
+    std::string get_stats() const;
 };
 
 
