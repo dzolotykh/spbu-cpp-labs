@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 #include "entity/creep/FractionCreep.h"
 #include "entity/hero/Pudge.h"
