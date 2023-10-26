@@ -1,5 +1,3 @@
 #include "FaerieFire.h"
 
-FaerieFire::FaerieFire(): Item(50) {
-
-}
+FaerieFire::FaerieFire() : Item(50) {}

@@ -4,9 +4,8 @@
 #include "Item.h"
 
 class Tango : public Item {
-public:
-    Tango();
+ public:
+  Tango();
 };
-
 
 #endif

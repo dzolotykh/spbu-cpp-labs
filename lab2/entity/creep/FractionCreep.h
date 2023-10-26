@@ -3,14 +3,12 @@
 
 #include "Creep.h"
 
+class FractionCreep : public Creep {
+ private:
+  bool is_dire;
 
-class FractionCreep: public Creep {
-private:
-    bool is_dire;
-
-public:
-    FractionCreep(bool _is_dire, int creep_type);
+ public:
+  FractionCreep(bool _is_dire, int creep_type);
 };
-
 
 #endif

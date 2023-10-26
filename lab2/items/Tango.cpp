@@ -1,3 +1,3 @@
 #include "Tango.h"
 
-Tango::Tango(): Item(20) {}
+Tango::Tango() : Item(20) {}

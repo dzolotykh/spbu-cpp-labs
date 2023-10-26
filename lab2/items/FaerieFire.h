@@ -3,10 +3,9 @@
 
 #include "Item.h"
 
-class FaerieFire: public Item {
-public:
-    FaerieFire();
+class FaerieFire : public Item {
+ public:
+  FaerieFire();
 };
-
 
 #endif
