@@ -1,89 +1,99 @@
 #include <iostream>
 #include <vector>
-
-#include "entity/creep/FractionCreep.h"
-#include "entity/hero/Pudge.h"
-#include "game/Game.h"
+#include "thread"
+#include "entity/hero/Hero.h"
+#include "entity/hero/Axe.h"
+#include "entity/hero/Alchemist.h"
+#include "entity/hero/Dazzle.h"
 #include "items/FaerieFire.h"
 #include "items/Tango.h"
-#include "team/Team.h"
+#include "game/Game.h"
 
-void test1(bool happy_end) {
-  std::cout << "test 1" << std::endl;
-  Hero* hero = new Pudge();
-  std::vector<FractionCreep*> creeps = {
-      new FractionCreep(false, 1),
-      new FractionCreep(false, (happy_end ? 1 : 2)),
-      new FractionCreep(false, (happy_end ? 1 : 3)),
-  };
 
-  while (hero->is_alive() && !creeps.empty()) {
-    int old_creep_hp = creeps[0]->get_health();
-    hero->attack(creeps[0]);
-    std::cout << "Pudge has attacked creep. Creep hp " << old_creep_hp
-              << " ---> " << creeps[0]->get_health() << std::endl;
-    if (!creeps[0]->is_alive()) {
-      std::cout << "Creep died." << std::endl;
-      delete creeps[0];
-      creeps.erase(creeps.begin());
-    }
-    for (auto& i : creeps) {
-      int old_pudge_hp = hero->get_health();
-      i->attack(hero);
-      std::cout << "Creep has attacked Pudge. Pudge hp " << old_pudge_hp
-                << " ---> " << hero->get_health() << std::endl;
-      if (!hero->is_alive()) {
-        break;
-      }
-    }
-  }
-
-  if (!hero->is_alive()) {
-    std::cout << "Pudge died :((" << std::endl;
-  } else {
-    std::cout << "Pudge has killed all creeps. Pudge's health: "
-              << hero->get_health() << std::endl;
-  }
-  delete hero;
-  for (auto & creep : creeps) {
-    delete creep;
-  }
+// проверяем, убьет ли акс при здоровье меньше 20%
+void test1() {
+    Hero *h1 = new Axe();
+    Hero *h2 = new Axe();
+    h2->set_health(h2->get_max_health() / 100 * 15);
+    h1->ability(h2);
+    assert(h2->get_health() == 0);
+    std::cout << "Тест #1 пройден" << std::endl;
 }
 
+// проверяем, убьет ли акс при здоровье больше 20%
 void test2() {
-  std::cout << "test 2" << std::endl;
-  Hero* hero = new Pudge();
-  std::cout << "Pudge's health: " << hero->get_health() << std::endl;
-
-  Item* item = new Tango();
-  Item* item2 = new FaerieFire();
-  hero->add_item(item);
-  hero->add_item(item2);
-  Creep* creep = new FractionCreep(false, 1);
-  creep->attack(hero);
-  std::cout << "Creep has attacked Pudge. Pudge's hp: " << hero->get_health()
-            << std::endl;
-  std::cout << "Used item with index = 0 (tango, + 20hp)" << std::endl;
-  hero->use_item(0);
-  std::cout << "Pudge's health: " << hero->get_health() << std::endl;
-
-  delete hero;
-  delete creep;
-  delete item;
-  delete item2;
+    Hero *h1 = new Axe();
+    Hero *h2 = new Axe();
+    h2->set_health(h2->get_max_health());
+    h1->ability(h2);
+    assert(h2->get_health() != 0);
+    std::cout << "Тест #2 пройден" << std::endl;
 }
 
-void test3() {
-  std::cout << "test 3" << std::endl;
-  Game* g = new Game();
-  g->start(123);
-  delete g;
+// проверяем способность алхимика добавлять себе здоровье параллельно
+void test3(bool show_logs) {
+    Hero *h1 = new Alchemist();
+    h1->set_health(20);
+    h1->ability(nullptr);
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    if (show_logs) std::cout << h1->get_health() << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    if (show_logs) std::cout << h1->get_health() << std::endl;
+    assert(h1->get_health() != 20);
+    std::cout << "Тест #3 пройден" << std::endl;
 }
+
+// проверяем хил дазла
+void test4() {
+    Hero *h = new Dazzle();
+    h->set_health(28);
+    h->ability(h);
+    assert(h->get_health() == 228);
+    std::cout << "Тест #4 пройден" << std::endl;
+}
+
+// проверям первый предмет, добавляет +150 к хп
+void test5() {
+    Hero *h = new Axe();
+    h->add_item(new FaerieFire());
+    h->set_health(20);
+    h->use_item(0);
+    assert(h->get_health() == 170);
+    std::cout << "Тест #5 пройден" << std::endl;
+}
+
+// проверям второй предмет, добавляет +150 к хп за 2 секунды
+void test6() {
+    Hero *h = new Axe();
+    h->add_item(new Tango());
+    h->set_health(20);
+    h->use_item(0);
+    std::this_thread::sleep_for(std::chrono::milliseconds (1500));
+    assert(h->get_health() != 20);
+    std::cout << "Тест #6 пройден" << std::endl;
+}
+
+void test7() {
+    Game *g = new Game();
+    g->start(123);
+    delete g;
+}
+
+void test8() {
+    Game *g = new Game();
+    HeroesIds ids(0, 1, 2, 1);
+    g->start(ids, 228);
+    delete g;
+}
+
 
 int main() {
-  test1(true);
-  std::cout << "--------------------------" << std::endl;
-  test2();
-  std::cout << "--------------------------" << std::endl;
-  test3();
+    test1();
+    test2();
+    test3(false);
+    test4();
+    test5();
+    test6();
+    test7();
+    test8();
 }

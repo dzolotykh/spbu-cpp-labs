@@ -37,3 +37,11 @@ int Entity::get_health() const { return health; }
 int Entity::get_mana() const { return mana; }
 
 int Entity::get_damage() const { return damage; }
+
+int Entity::get_max_health() const {
+    return max_health;
+}
+
+int Entity::get_max_mana() const {
+    return max_mana;
+}

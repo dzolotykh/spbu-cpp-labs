@@ -14,6 +14,7 @@ class Dazzle : public Hero {
 
  public:
   Dazzle();
+  void ability(Entity *e) override;
 };
 
 #endif

@@ -9,3 +9,8 @@ Dazzle::Dazzle() {
   this->strength = this->base_strength;
   this->name = "Dazzle";
 }
+
+void Dazzle::ability(Entity *e) {
+    e->add_health(200);
+}
+

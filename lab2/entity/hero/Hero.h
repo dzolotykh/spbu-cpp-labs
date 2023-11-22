@@ -27,6 +27,8 @@ class Hero : public Entity {
 
   std::string get_name() const;
   std::string get_stats() const;
+
+  virtual void ability(Entity *e) = 0;
 };
 
 #endif

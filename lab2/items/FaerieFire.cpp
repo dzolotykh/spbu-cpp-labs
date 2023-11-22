@@ -1,3 +1,6 @@
 #include "FaerieFire.h"
+#include "../entity/hero/Hero.h"
 
-FaerieFire::FaerieFire() : Item(50) {}
+void FaerieFire::apply(Hero *h) {
+    h->add_health(150);
+}

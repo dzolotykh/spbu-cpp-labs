@@ -6,11 +6,7 @@ void Hero::add_item(Item* i) { this->inventory->add_item(i); }
 
 void Hero::use_item(int item_id) {
   Item* item = this->inventory->operator[](item_id);
-  this->add_health(item->get_add_health());
-  this->add_agility(item->get_add_agility());
-  this->add_strength(item->get_add_strength());
-  this->add_intelligence(item->get_add_intelligence());
-  this->add_mana(item->get_add_mana());
+  item->apply(this);
 }
 
 void Hero::add_strength(int _add) {

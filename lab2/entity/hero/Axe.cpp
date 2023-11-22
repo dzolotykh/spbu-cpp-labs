@@ -9,3 +9,11 @@ Axe::Axe() {
   this->strength = this->base_strength;
   this->name = "Axe";
 }
+
+void Axe::ability(Entity *e) {
+    if ((double)e->get_health() < (double)e->get_max_health() * 0.2) {
+        e->set_health(0);
+    } else {
+        e->add_health(-10);
+    }
+}

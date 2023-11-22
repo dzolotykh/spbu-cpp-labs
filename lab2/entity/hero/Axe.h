@@ -14,6 +14,7 @@ class Axe : public Hero {
 
  public:
   Axe();
+  void ability(Entity *e) override;
 };
 
 #endif

@@ -5,7 +5,13 @@ class Entity {
  protected:
   int health{};
   int max_health{};
-  int mana{};
+public:
+    int get_max_health() const;
+
+    int get_max_mana() const;
+
+protected:
+    int mana{};
   int max_mana{};
 
   int damage;

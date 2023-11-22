@@ -7,12 +7,11 @@
 
 class Inventory {
  private:
-  Item** contains;
+  std::array<Item*, 3> contains;
   size_t items_count;
 
  public:
   Inventory();
-  ~Inventory();
 
   void add_item(Item* item);
   Item* operator[](int index);
