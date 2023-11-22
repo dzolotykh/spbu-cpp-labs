@@ -2,6 +2,8 @@
 #define LAB2_ALCHEMIST_H
 
 #include "Hero.h"
+#include <vector>
+#include <thread>
 
 class Alchemist : public Hero {
  private:

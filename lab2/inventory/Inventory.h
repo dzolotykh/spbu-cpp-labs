@@ -2,6 +2,7 @@
 #define INVENTORY_H
 
 #include <iostream>
+#include <array>
 
 #include "../items/Item.h"
 

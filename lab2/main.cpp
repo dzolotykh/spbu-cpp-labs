@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cassert>
 #include "thread"
 #include "entity/hero/Hero.h"
 #include "entity/hero/Axe.h"
