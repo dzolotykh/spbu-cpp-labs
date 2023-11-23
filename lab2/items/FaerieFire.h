@@ -4,6 +4,7 @@
 #include "Item.h"
 #include <thread>
 #include <vector>
+#include <memory>
 
 class FaerieFire : public Item {
 public:

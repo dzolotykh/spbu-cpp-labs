@@ -4,6 +4,7 @@
 #include "Item.h"
 #include <vector>
 #include <thread>
+#include <memory>
 
 class Tango : public Item {
 private:

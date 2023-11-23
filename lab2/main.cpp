@@ -9,6 +9,7 @@
 #include "items/FaerieFire.h"
 #include "items/Tango.h"
 #include "game/Game.h"
+#include <memory>
 
 
 // проверяем, убьет ли акс при здоровье меньше 20%

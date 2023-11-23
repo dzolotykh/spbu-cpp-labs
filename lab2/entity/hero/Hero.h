@@ -3,6 +3,7 @@
 
 #include "../../inventory/Inventory.h"
 #include "../Entity.h"
+#include <memory>
 
 class Hero : public Entity {
  protected:
