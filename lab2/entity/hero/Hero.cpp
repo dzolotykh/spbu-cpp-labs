@@ -4,9 +4,9 @@
 
 void Hero::add_item(Item* i) { this->inventory->add_item(i); }
 
-void Hero::use_item(int item_id) {
+void Hero::use_item(int item_id, std::shared_ptr<Hero> &target) {
   Item* item = this->inventory->operator[](item_id);
-  item->apply(this);
+  item->apply(target);
 }
 
 void Hero::add_strength(int _add) {

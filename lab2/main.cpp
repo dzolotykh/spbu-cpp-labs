@@ -55,20 +55,22 @@ void test4() {
 
 // проверям первый предмет, добавляет +150 к хп
 void test5() {
-    Hero *h = new Axe();
+    std::shared_ptr<Hero> h;
+    h = std::make_shared<Axe>();
     h->add_item(new FaerieFire());
     h->set_health(20);
-    h->use_item(0);
+    h->use_item(0, h);
     assert(h->get_health() == 170);
     std::cout << "Тест #5 пройден" << std::endl;
 }
 
 // проверям второй предмет, добавляет +150 к хп за 2 секунды
 void test6() {
-    Hero *h = new Axe();
+    std::shared_ptr<Hero> h;
+    h = std::make_shared<Axe>();
     h->add_item(new Tango());
     h->set_health(20);
-    h->use_item(0);
+    h->use_item(0, h);
     std::this_thread::sleep_for(std::chrono::milliseconds (1500));
     assert(h->get_health() != 20);
     std::cout << "Тест #6 пройден" << std::endl;

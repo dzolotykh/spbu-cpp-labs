@@ -7,7 +7,7 @@
 
 class FaerieFire : public Item {
 public:
-  void apply(Hero *h) override;
+  void apply(std::shared_ptr<Hero> &h) override;
 };
 
 #endif

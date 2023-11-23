@@ -9,7 +9,7 @@ class Tango : public Item {
 private:
     std::vector<std::thread*> available_threads;
  public:
-  void apply(Hero *h) override;
+  void apply(std::shared_ptr<Hero> &h) override;
   ~Tango();
 };
 

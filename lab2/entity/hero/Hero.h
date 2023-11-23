@@ -19,7 +19,7 @@ class Hero : public Entity {
   Hero(int _max_health, int _max_mana, int _damage);
 
   void add_item(Item* i);
-  void use_item(int item_id);
+  void use_item(int item_id, std::shared_ptr<Hero> &target);
 
   void add_strength(int _add);
   void add_agility(int _add);

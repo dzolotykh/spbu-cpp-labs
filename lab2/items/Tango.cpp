@@ -3,7 +3,7 @@
 #include <thread>
 #include <chrono>
 
-void Tango::apply(Hero *h) {
+void Tango::apply(std::shared_ptr<Hero> &h) {
         auto t = new std::thread([&h]() {
         h->add_health(50);
         std::this_thread::sleep_for(std::chrono::seconds(1));
