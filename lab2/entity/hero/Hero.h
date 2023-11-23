@@ -15,7 +15,7 @@ class Hero : public Entity {
 
  public:
   Hero();
-  ~Hero();
+  virtual ~Hero();
 
   Hero(int _max_health, int _max_mana, int _damage);
 

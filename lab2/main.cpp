@@ -20,6 +20,8 @@ void test1() {
     h1->ability(h2);
     assert(h2->get_health() == 0);
     std::cout << "Тест #1 пройден" << std::endl;
+    delete h1;
+    delete h2;
 }
 
 // проверяем, убьет ли акс при здоровье больше 20%
@@ -30,6 +32,8 @@ void test2() {
     h1->ability(h2);
     assert(h2->get_health() != 0);
     std::cout << "Тест #2 пройден" << std::endl;
+    delete h1;
+    delete h2;
 }
 
 // проверяем способность алхимика добавлять себе здоровье параллельно
@@ -43,6 +47,7 @@ void test3(bool show_logs) {
     if (show_logs) std::cout << h1->get_health() << std::endl;
     assert(h1->get_health() != 20);
     std::cout << "Тест #3 пройден" << std::endl;
+    delete h1;
 }
 
 // проверяем хил дазла
@@ -52,6 +57,7 @@ void test4() {
     h->ability(h);
     assert(h->get_health() == 228);
     std::cout << "Тест #4 пройден" << std::endl;
+    delete h;
 }
 
 // проверям первый предмет, добавляет +150 к хп
