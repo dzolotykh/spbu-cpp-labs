@@ -33,4 +33,4 @@ protected:
   int get_damage() const;
 };
 
-#endif
+#endif // LAB2_ENTITY_H

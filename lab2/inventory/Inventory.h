@@ -18,4 +18,4 @@ class Inventory {
   Item* operator[](int index);
 };
 
-#endif
+#endif // INVENTORY_H

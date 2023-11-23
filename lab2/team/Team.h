@@ -17,4 +17,4 @@ public:
     void push_hero(Hero *h);
 };
 
-#endif
+#endif // LAB2_TEAM_H

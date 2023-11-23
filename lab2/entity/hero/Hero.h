@@ -32,4 +32,4 @@ class Hero : public Entity {
   virtual void ability(Entity *e) = 0;
 };
 
-#endif
+#endif // LAB2_HERO_H

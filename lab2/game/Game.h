@@ -30,4 +30,4 @@ public:
     ~Game();
 };
 
-#endif
+#endif // LAB2_GAME_H

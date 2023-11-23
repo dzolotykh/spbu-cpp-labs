@@ -14,4 +14,4 @@ private:
   ~Tango();
 };
 
-#endif
+#endif // LAB2_TANGO_H

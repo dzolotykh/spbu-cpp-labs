@@ -12,4 +12,4 @@ class Item {
   virtual ~Item() {};
 };
 
-#endif
+#endif // LAB2_ITEM_H

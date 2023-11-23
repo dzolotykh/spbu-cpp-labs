@@ -11,4 +11,4 @@ public:
   void apply(std::shared_ptr<Hero> &h) override;
 };
 
-#endif
+#endif // LAB2_FAERIEFIRE_H

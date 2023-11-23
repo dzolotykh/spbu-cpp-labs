@@ -17,4 +17,4 @@ class Axe : public Hero {
   void ability(Entity *e) override;
 };
 
-#endif
+#endif // LAB2_AXE_H
