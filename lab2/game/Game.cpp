@@ -50,6 +50,7 @@ Hero *Game::generate_hero() {
             return new Dazzle();
             break;
     }
+    return nullptr;
 }
 
 Hero *Game::generate_hero(int hero_id) {
@@ -61,6 +62,7 @@ Hero *Game::generate_hero(int hero_id) {
         case 2:
             return new Dazzle();
     }
+    return nullptr;
 }
 
 Game::~Game() {
