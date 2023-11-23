@@ -22,3 +22,8 @@ void Team::push_hero(Hero *h) {
     heroes[heroes_cnt] = h;
     heroes_cnt++;
 }
+
+Team::~Team() {
+    delete heroes[0];
+    delete heroes[1];
+}

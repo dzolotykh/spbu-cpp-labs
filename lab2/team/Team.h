@@ -12,6 +12,7 @@ private:
 
 public:
     Team(bool _is_dire);
+    ~Team();
     void print_team();
     void push_hero(Hero *h);
 };

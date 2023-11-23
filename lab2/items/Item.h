@@ -9,6 +9,7 @@ class Hero;
 class Item {
  public:
   virtual void apply(std::shared_ptr<Hero> &h) = 0;
+  virtual ~Item() {};
 };
 
 #endif
