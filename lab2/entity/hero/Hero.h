@@ -7,7 +7,7 @@
 
 class Hero : public Entity {
  protected:
-  Inventory* inventory;
+  std::unique_ptr<Inventory> inventory;
   int strength;
   int agility;
   int intelligence;

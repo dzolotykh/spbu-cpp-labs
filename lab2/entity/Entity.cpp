@@ -28,8 +28,6 @@ Entity::Entity(int _max_health, int _max_mana, int _damage)
 
 Entity::Entity() = default;
 
-void Entity::attack(Entity *other) const { other->add_health(-this->damage); }
-
 bool Entity::is_alive() const { return this->health != 0; }
 
 int Entity::get_health() const { return health; }

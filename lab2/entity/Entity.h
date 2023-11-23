@@ -24,7 +24,6 @@ protected:
   void set_mana(int _mana);
   void add_health(int _health);
   void add_mana(int _mana);
-  void attack(Entity* other) const;
   bool is_alive() const;
 
   int get_health() const;

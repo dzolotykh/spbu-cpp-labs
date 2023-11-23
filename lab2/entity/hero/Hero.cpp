@@ -21,12 +21,12 @@ void Hero::add_agility(int _add) {
   this->strength = std::max(0, this->agility + _add);
 }
 
-Hero::Hero() { this->inventory = new Inventory(); }
+Hero::Hero() { this->inventory = std::make_unique<Inventory>(); }
 
 Hero::Hero(int _max_health, int _max_mana, int _damage)
     : Entity(_max_health, _max_mana, _damage) {}
 
-Hero::~Hero() { delete this->inventory; }
+Hero::~Hero() {}
 
 std::string Hero::get_name() const { return this->name; }
 
