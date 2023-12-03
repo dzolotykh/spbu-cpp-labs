@@ -1,23 +1,10 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.22)
 project(lab2)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
-file(GLOB SOURCES
-        "entity/.cpp"
-        "inventory/.cpp"
-        "items/.cpp"
-        "game/.cpp"
-        "team/.cpp"
+file(GLOB_RECURSE sources
+        "src/*.cpp" "src/*.h"
 )
 
-include_directories(
-        .
-        inventory
-        entity
-        items
-        team
-        game
-)
-
-add_executable(main main.cpp ${SOURCES})
+add_executable(main ${sources})
