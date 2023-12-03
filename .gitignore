@@ -1,6 +1,6 @@
-lab1/*.o
 .*
-lab1/main
+**/.o
+**/main
+**/cmake-build-debug
+**/CmakeFiles/
 !.gitignore
-lab2/cmake-build-debug
-lab2/CMakeFiles/*
