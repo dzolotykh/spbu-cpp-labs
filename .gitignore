@@ -1,5 +1,5 @@
 .*
-**/.o
+**/*.o
 **/main
 **/cmake-build-debug
 **/CmakeFiles/
